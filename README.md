@@ -75,7 +75,7 @@ The Task Manager Console Application is a Python-based tool designed to help use
   
 - **Explanation:**
     1. Add Task:
-       1. Users are prompted to enter details for a new task. They are also asked if the task is urgent (e.g `is_urgent (bool): Yes, YES, YeS, NO, No, o ... etc are considered as a vlid input`).
+       1. Users are prompted to enter details for a new task. They are also asked if the task is urgent (e.g `is_urgent (bool): any shape of yes and no is considered as a valid input`).
        2. If the task is urgent, the UrgentTask class is used to create the task with a priority level.
        3. Otherwise, a regular Task is created.
     2. View Tasks:
