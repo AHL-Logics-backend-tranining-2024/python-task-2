@@ -21,6 +21,8 @@ class Task:
 
 # Adding Proiority 
 
+
+
 class UrgentTask(Task):
     def __init__(self,priority,title,description,due_date,status="In progress"):
         super().__init__(title,description,due_date,status)

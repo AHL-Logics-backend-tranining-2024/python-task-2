@@ -66,6 +66,9 @@ def Delete_Task():
     for task in tasks_list:
         if taskId==task.task_id:
             tasks_list.remove(task)
+            print ("task have been removed ")
+        else:
+            print ("No Task found ")
 
 def main():
     while True:
