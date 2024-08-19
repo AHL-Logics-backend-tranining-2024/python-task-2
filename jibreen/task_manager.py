@@ -4,6 +4,7 @@ from display import display_Header,display_menu
 
 
 if __name__ == "__main__":
+   load_tasks_from_json()
    # Display the header of the application
    display_Header()
 

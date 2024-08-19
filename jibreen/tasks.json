@@ -1,0 +1,9 @@
+[
+    {
+        "task_id": 1,
+        "title": "lolo",
+        "description": "meme",
+        "due_date": "2000-05-12",
+        "status": "In Progress"
+    }
+]
