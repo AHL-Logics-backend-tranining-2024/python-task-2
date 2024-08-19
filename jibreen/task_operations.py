@@ -148,3 +148,51 @@ def deleteTask(id):
     print("******************************************************")
     print("Removed Successfully")
     print("******************************************************")
+
+
+def save_tasks_to_JSON_file(file_name="tasks.json"):
+  """
+    Saves the current list of tasks to a JSON file.
+
+    :param file_name: Name of the JSON file to save tasks (default is "tasks.json")
+  """
+  # Open the specified file in write mode
+  with open(file_name, 'w') as file:
+        # Serialize the tasks list to JSON and write to the file
+        json.dump([task.__dict__ for task in tasks], file, indent = 4)
+  print("******************************************************")
+  print(f"Tasks saved to {file_name}.") # Confirmation message
+  print("******************************************************")
+
+
+
+def load_tasks_from_json(file_name = "tasks.json"):
+    """
+    Loads tasks from a JSON file into the current task list.
+
+    :param file_name: Name of the JSON file to load tasks from (default is "tasks.json")
+    """
+    # Check if the file exists
+    if not os.path.exists(file_name):
+        print(f"No file named {file_name} found. Starting with an empty task list.")
+        return
+
+    # Open the specified file in read mode
+    with open(file_name, 'r') as file:
+         # Deserialize the JSON data into a list of task data
+         task_list  = json.load(file);
+         for task_data in task_list:
+             # Extract and remove the task ID from the task data
+             task_id = task_data.pop('task_id', None)
+
+             # Create a Task or UrgentTask object based on the presence of 'priority' 
+             if "priority" in task_data:
+                 task = UrgentTask(**task_data)
+             else:
+                 task = Task(**task_data)
+             task.task_id = task_id
+             # Add the task to the list if it's not a duplicate
+             if not is_duplicate_task(task):
+              tasks.append(task);
+    print(f"Loaded tasks from {file_name}.")
+       
