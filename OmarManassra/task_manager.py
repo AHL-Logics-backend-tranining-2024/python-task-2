@@ -1,7 +1,8 @@
 from  utils import validate_date,get_valid_input,validate_status,validate_priority
 from task import Task,UrgentTask
-
+# List contains all the tasks 
 tasks_list=[]
+
 def Add_task():
     """ Call the Exception Handling Functions in the other module at every step it should be called"""
     title=input("Enter the title")
@@ -36,20 +37,35 @@ def View_Tasks():
 
 def Update_Task():
     taskId=int(input("Enter the task you want to update"))
+    title=input("Enter the title updated ")
+    description=input("enter the description update")
+    due_date = input("Enter due date (YYYY-MM-DD) update: ")
+    validate_date(due_date)
+    status = input("Enter status ('InProgress' or 'Completed'): update ")
+    validate_status(status)
+    for task in tasks_list:
+        if task.task_id==taskId:
+            isUrgant=input("enter if urgant or not (yes or no or Invalid)")
+            if isUrgant in ["yes","no"]:
+                priority = input("Enter priority ('High', 'Medium', 'Low'): ")
+                validate_priority(priority)
+                task["title"]=title
+                task["description"]=description
+                task["due_date"]=due_date
+                task["status"]=status
+                task["priority"]=priority
+            else :
+                task["title"]=title
+                task["description"]=description
+                task["due_date"]=due_date
+                task["status"]=status
 
-
-
-
-
-
-
-    
 
 def Delete_Task():
     taskId=int(input("Enter the task you want to delate "))
     for task in tasks_list:
         if taskId==task.task_id:
-            tasks_list.remove(taskId)
+            tasks_list.remove(task)
 
 def main():
     while True:
