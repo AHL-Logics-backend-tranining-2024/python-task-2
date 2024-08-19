@@ -18,9 +18,9 @@ def get_valid_input(inputt):
  
 
 def validate_status(status):
- valid_statuses = ['InProgress', 'Completed']
+ valid_statuses = ['inProgress', 'completed']
  while True:
-        status = input("Enter status (InProgress or Completed): ").strip()
+        status = input("Enter status (InProgress or Completed): ").strip().lower()
         if status in valid_statuses:
             return status
         else:
