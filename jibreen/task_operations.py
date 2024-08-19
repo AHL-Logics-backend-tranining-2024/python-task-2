@@ -165,7 +165,6 @@ def save_tasks_to_JSON_file(file_name="tasks.json"):
   print("******************************************************")
 
 
-
 def load_tasks_from_json(file_name = "tasks.json"):
     """
     Loads tasks from a JSON file into the current task list.
@@ -196,3 +195,57 @@ def load_tasks_from_json(file_name = "tasks.json"):
               tasks.append(task);
     print(f"Loaded tasks from {file_name}.")
        
+
+def search_by_status_or_due_date(status=None, due_date=None):
+    """
+    Searches for tasks based on status, due date, or both.
+
+    :param status: Status of the tasks to search for (optional)
+    :param due_date: Due date of the tasks to search for (optional, format: YYYY-MM-DD)
+    """
+    print("******************************************************")
+    if status and not due_date:
+        # Search by status only
+        match_statement = [task for task in tasks if task.status.lower() == validate_status(status).lower()]
+        if not match_statement:
+            print(f"No tasks found with status '{status}'.")
+        else:
+            for task in match_statement:
+                print(task)
+                print("\n")
+
+    elif not status and due_date:
+        # Search by due date only
+        try:
+            valid_due_date = validate_date(due_date)
+            match_statement = [task for task in tasks if task.due_date == valid_due_date]
+        except ValueError as e:
+            print(e) # Print validation error if due date is invalid
+            return
+
+        if not match_statement:
+            print(f"No tasks found with due date '{due_date}'.")
+        else:
+            for task in match_statement:
+                print(task)
+                print("\n")
+
+    elif status and due_date:
+        # Search by both status and due date
+        try:
+            valid_due_date = validate_date(due_date)
+            match_statement = [task for task in tasks if task.due_date == valid_due_date and task.status.lower() == validate_status(status).lower()]
+        except ValueError as e:
+            print(e)  # Print validation error if due date is invalid
+            return
+
+        if not match_statement:
+            print(f"No tasks found with status '{status}' and due date '{due_date}'.")
+        else:
+            for task in match_statement:
+                print(task)
+                print("\n")
+
+    else:
+        # If neither status nor due date is provided, print all tasks
+        Print_Task()
