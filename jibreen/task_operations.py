@@ -249,3 +249,16 @@ def search_by_status_or_due_date(status=None, due_date=None):
     else:
         # If neither status nor due date is provided, print all tasks
         Print_Task()
+
+def Print_Task():
+   """
+    Prints all tasks in the task list. If no tasks are available, it displays a message indicating that no tasks are present.
+   """
+   if not tasks:
+        # If the task list is empty, print a message indicating no tasks are available
+        print("No tasks available.")
+   else:
+        # Iterate through the task list and print each task
+        for task in tasks:
+            print(task)
+            print("\n")
