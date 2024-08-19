@@ -47,6 +47,81 @@ def view_tasks():
         print("There is no urgent tasks here")
 
 
+def update_task():
+    #Make all tasks in one place 
+    allTasks= regularTasks+ urgentTasks
+    taskUpdate= None
+    taskId= int(get_valid_input("Enter task ID you need to update"))
+    #Foor loop to find the specific task that need update
+    for task in allTasks:
+        if task.task_id == taskId:
+            taskUpdate= task
+
+    if taskUpdate:
+        new_taskTitle= get_valid_input("Enter the new task title : ")
+        new_taskDescription= get_valid_input("Enter the new task description : ")
+        new_taskDueDate= get_valid_input("Enter the new due date(DD/MM/YYYY) : ")
+        if new_taskDueDate:      #to make sure not getting value error
+            validate_date(new_taskDueDate)
+        new_taskStatus= get_valid_input("Enter the new status : ")
+        if new_taskStatus:
+            validate_status(new_taskStatus)
+        
+        taskUpdate.update_details(new_taskTitle,new_taskDescription,new_taskDueDate,new_taskStatus)
+        print("Task updated")
+
+
+    else:
+        print("Task not found")
+
+
+
+def delete_task():
+    allTasks= regularTasks+ urgentTasks
+    taskDelete= None
+    taskId= int(get_valid_input("Enter task ID you need to delet"))
+    #Foor loop to find the specific task that need delet
+    for task in allTasks:
+        if task.task_id == taskId:
+            taskDelete= task
+        allTasks.remove(task) 
+        print("Task removed")
+
+
+#Task manager menu 
+while True:
+    print("\nTask Manager Menu:")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Update Task")
+    print("4. Delete Task")
+    print("5. Exit")
+    
+    choice = input("Select an option (1-5): ")
+    
+    match choice:
+        case '1':
+            add_task()
+        case '2':
+            view_tasks()
+        case '3':
+            update_task()
+        case '4':
+            delete_task()
+        case '5':
+            print("Exiting Task Manager.")
+            break
+        case _:
+            print("Invalid choice. Please select a valid option.")
+
+
+
+
+
+
+
+
+
 
 
 
