@@ -51,4 +51,28 @@ class Task:
        )
 
 
+#create module is Urgent task [Task + one property]
+class UrgentTask(Task):
+    def __init__(self, title, description, due_date, status, priority):
+        """
+        Initializes a new UrgentTask with additional priority details.
+        
+        :param title: Title of the task
+        :param description: Description of the task
+        :param due_date: Due date of the task (must be validated)
+        :param status: Current status of the task (must be validated)
+        :param priority: Priority level of the urgent task (must be validated)
+        """
+        super().__init__( title, description, due_date, status) # Call the parent constructor
+        self.priority = validate_priority(priority) # Validate and set the priority
 
+    
+    def __str__(self):
+         """
+        Returns a string representation of the urgent task, including priority.
+        
+        :return: String representation of the urgent task
+        """
+         return (
+          f"{super().__str__()}"  # Include the string representation from the parent class
+          f"Priority: {self.priority}")
