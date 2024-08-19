@@ -219,8 +219,8 @@ def search_by_status_or_due_date(status=None, due_date=None):
         try:
             valid_due_date = validate_date(due_date)
             match_statement = [task for task in tasks if task.due_date == valid_due_date]
-        except ValueError as e:
-            print(e) # Print validation error if due date is invalid
+        except ValueError:
+            print(f"Error: The due date '{due_date}' is not in the correct format (YYYY-MM-DD).") # Print validation error if due date is invalid
             return
 
         if not match_statement:
@@ -235,8 +235,8 @@ def search_by_status_or_due_date(status=None, due_date=None):
         try:
             valid_due_date = validate_date(due_date)
             match_statement = [task for task in tasks if task.due_date == valid_due_date and task.status.lower() == validate_status(status).lower()]
-        except ValueError as e:
-            print(e)  # Print validation error if due date is invalid
+        except ValueError:
+            print(f"Error: The due date '{due_date}' is not in the correct format (YYYY-MM-DD).")  # Print validation error if due date is invalid
             return
 
         if not match_statement:
