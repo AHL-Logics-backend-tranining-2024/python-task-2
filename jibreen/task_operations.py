@@ -73,3 +73,78 @@ def is_duplicate_task(new_task):
             task.due_date == new_task.due_date):
             return True
     return False
+
+def find_task_by_id(task_list, task_id):
+    """
+    Finds a task in the list by its ID.
+
+    :param task_list: List of tasks to search through
+    :param task_id: ID of the task to find
+    :return: Task with the specified ID or None if not found
+    """
+    return next((task for task in task_list if task.task_id == task_id), None)
+
+def updatedTask(id):
+    """
+    Updates the details of a task identified by its ID.
+
+    :param id: ID of the task to update (must be a string)
+    """
+    if isinstance(id, str):
+        try:
+            # Find the task by ID
+            task = find_task_by_id(tasks, int(id))
+            if task is None:
+                print("Task not found")  
+                return  # Exit if the task is not found          
+        except ValueError:
+            print("Invalid ID format")
+            return  # Exit if the ID format is invalid 
+
+        # Get updated details from user
+        title = input("Update title: ").strip()
+        description = input("Update description: ").strip()
+        due_date = input("Update due date: ").strip()
+        status = input("Update status: ").strip()
+
+        print("******************************************************")
+        # Update task details with provided values
+        task.updated_details(
+            title=title or None,
+            description=description or None,
+            due_date=due_date or None,
+            status=status or None
+        )
+        
+        # Print updated task details
+        print("******************************************************")
+        print("Task ID:", task.task_id)
+        print("Title:", task.title)
+        print("Description:", task.description)
+        print("Due Date:", task.due_date)
+        print("Status:", task.status)
+        print("******************************************************")
+
+def deleteTask(id):
+    """
+    Deletes a task identified by its ID from the task list.
+
+    :param id: ID of the task to delete (must be a string)
+    """
+    if isinstance(id, str):
+        try:
+            # Convert ID to integer and find the task
+            task_id = int(id)
+            task = find_task_by_id(tasks, task_id)
+            if task is None:
+                print("Task not found")
+                return # Exit if the task is not found          
+        except ValueError:
+            print("Invalid ID format")
+            return  # Exit if the ID format is invalid   
+    
+    # Remove the found task from the list
+    tasks.remove(task);
+    print("******************************************************")
+    print("Removed Successfully")
+    print("******************************************************")
