@@ -23,7 +23,7 @@ class Task:
 
     #Define display method for returning thhe task details as string    
     def display(self):
-        return(f"Task ID: {self.task_id}\n Title: {self.title}\n Description: {self.description}\n Due Date: {self.due_date}\n Status: {self.status}")
+        return(f" Task ID: {self.task_id}\n Title: {self.title}\n Description: {self.description}\n Due Date: {self.due_date}\n Status: {self.status}")
 
 
 

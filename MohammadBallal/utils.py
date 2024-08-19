@@ -16,12 +16,12 @@ def get_valid_input(prompt):
 
 #Function for validate status if its in the valid status list or not
 def validate_status(status):
-    validStatus= ['InProgress','Completed']
+    validStatus= ['inprogress','completed']
     if status not in validStatus:
         raise ValueError(f"Ststus should be one of : {validate_status}")
 
 #Function for validate priority if its in the valid priority list or not
 def valid_priority(priority):
-    validPriority= ['High', 'Medium', 'Low']
+    validPriority= ['high', 'medium', 'low']
     if priority not in validPriority:
         raise ValueError(f"Priority should be one of : {valid_priority}")
