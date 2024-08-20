@@ -1,9 +1,9 @@
 from datetime import date
-
+from task_status import Status
 class Task:
  
     counter = 0  
-    def __init__(self, title, description, due_date, status = 'InProgress'):
+    def __init__(self, title, description, due_date, status =Status.IN_PROGRESS):
         Task.counter += 1 
         self.task_id = Task.counter 
         self.title = title
