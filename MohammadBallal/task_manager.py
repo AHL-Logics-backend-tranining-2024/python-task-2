@@ -69,6 +69,11 @@ def update_task():
             new_taskStatus= input("Enter the new status( Completed || InProgress ) : ").lower() #to make sure not getting value error
             if new_taskStatus:
                 validate_status(new_taskStatus)
+                
+            if isinstance(taskUpdate, UrgentTask):
+                new_priority = input("Enter the new priority (High || Medium || Low): ").lower()
+                valid_priority(new_priority)
+                taskUpdate.priority = new_priority
         
             taskUpdate.update_details(new_taskTitle,new_taskDescription,new_taskDueDate,new_taskStatus)
             print("Task updated")
