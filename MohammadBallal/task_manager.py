@@ -83,6 +83,28 @@ def delete_task():
     
 
 
+def search_tasks():
+    allTasks = {**regularTasks, **urgentTasks}  
+
+    searchType = input("Type |1| if you want to search by Status and |2| by Due date: ")
+    #Search by status 
+    if searchType == '1':
+        searchStatus = input("Enter the status (Completed/InProgress): ").lower()
+        validate_status(searchStatus)
+        for task in allTasks.values():
+            if task.status.lower() == searchStatus:
+                print(task.display())
+    #Search by Due date
+    elif searchType == '2':
+        searchDate = get_valid_input("Enter the due date (DD/MM/YYYY): ")
+        validate_date(searchDate)
+        for task in allTasks.values():
+            if task.due_date == searchDate:
+                print(task.display())
+    else:
+        print("Invalid choice!")
+
+
 
 
 #Task manager menu 
@@ -91,10 +113,11 @@ while True:
     print("1. Add Task")
     print("2. View Tasks")
     print("3. Update Task")
-    print("4. Delete Task")
-    print("5. Exit")
+    print("4. Search Tasks")
+    print("5. Delete Task")
+    print("6. Exit")
     
-    choice = input("Select an option (1-5): ")
+    choice = input("Select an option (1-6): ")
     
     match choice:
         case '1':
@@ -104,8 +127,10 @@ while True:
         case '3':
             update_task()
         case '4':
-            delete_task()
+            search_tasks()
         case '5':
+            delete_task()
+        case '6':
             print("Exiting Task Manager.")
             break
         case _:
