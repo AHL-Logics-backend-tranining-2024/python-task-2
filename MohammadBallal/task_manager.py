@@ -2,8 +2,8 @@ from task import Task, UrgentTask
 from utils import validate_date, get_valid_input, valid_priority ,validate_status
 
 
-regularTasks= []
-urgentTasks= []
+regularTasks= {}
+urgentTasks= {}
 
 def add_task():
     #using get_valid_input for all user inputs to validate it
@@ -19,10 +19,10 @@ def add_task():
         #validate priority
         valid_priority(priority)
         task= UrgentTask(title,description,due_date,priority)
-        urgentTasks.append(task)
+        urgentTasks[task.task_id] = task
     else :
         task= Task(title,description,due_date)
-        regularTasks.append(task)
+        regularTasks[task.task_id] = task
     
     print("TASK ADDED SUCCESSFULLY")
 
@@ -31,14 +31,14 @@ def view_tasks():
     #Check if there any reguler tasks stored 
     if regularTasks:
         #Display every single task by display method from Task class
-        for task in regularTasks:
+        for task in regularTasks.values():
             print(f"{task.display()}\n")
             
     else:
         print("There is no reguler tasks here")
     #Check if there any urgent task stored 
     if urgentTasks:
-        for task in urgentTasks:
+        for task in urgentTasks.values():
             print(f"{task.display()}\n")
     else:
         print("There is no urgent tasks here")
@@ -46,21 +46,18 @@ def view_tasks():
 
 def update_task():
     #Make all tasks in one place 
-    allTasks= regularTasks+ urgentTasks
-    taskUpdate= None
+    allTasks= {**regularTasks, **urgentTasks}
     taskId= int(get_valid_input("Enter task ID you need to update : "))
-    #Foor loop to find the specific task that need update
-    for task in allTasks:
-        if task.task_id == taskId:
-            taskUpdate= task
+    taskUpdate = allTasks.get(taskId)
+    
 
     if taskUpdate:
         new_taskTitle= input("Enter the new task title : ")
         new_taskDescription= input("Enter the new task description : ")
         new_taskDueDate= input("Enter the new due date(DD/MM/YYYY) : ")
-        if new_taskDueDate:      #to make sure not getting value error
+        if new_taskDueDate:      
             validate_date(new_taskDueDate)
-        new_taskStatus= input("Enter the new status( Completed || InProgress ) : ").lower()
+        new_taskStatus= input("Enter the new status( Completed || InProgress ) : ").lower() #to make sure not getting value error
         if new_taskStatus:
             validate_status(new_taskStatus)
         
@@ -74,19 +71,15 @@ def update_task():
 
 
 def delete_task():
-    allTasks= regularTasks+ urgentTasks
-    taskDelete= None
     taskId= int(get_valid_input("Enter task ID you need to delete : "))
-    #Foor loop to find the specific task that need delete
-    for task in allTasks:
-        if task.task_id == taskId:
-            taskDelete= task
-    if taskDelete:
-        # Remove the task from the related list
-        if taskDelete in regularTasks:
-            regularTasks.remove(taskDelete)
-        elif taskDelete in urgentTasks:
-            urgentTasks.remove(taskDelete)
+    if taskId in regularTasks:
+        del regularTasks[taskId]  #Remove from regular tasks
+        print("Regular task deleted successfully.")
+    elif taskId in urgentTasks:
+        del urgentTasks[taskId]  #Remove from urgent tasks
+        print("Urgent task deleted successfully.")
+    else:
+        print("Task not found.")
     
 
 
