@@ -6,27 +6,33 @@ regularTasks= {}
 urgentTasks= {}
 
 def add_task():
-    #using get_valid_input for all user inputs to validate it
-    title= get_valid_input("What is the task title? : ")
-    description= get_valid_input("Just a little description for the task here please : ")
-    due_date= get_valid_input("Enter task due date (DD/MM/YYYY)")
-    #validate date format
-    validate_date(due_date)
-    status = get_valid_input("Enter task status (InProgress/Completed): ").lower()
-    validate_status(status)
-    #check if the task is urgent or not to know where to store it 
-    isUrgent= get_valid_input("Is this task urgent (please write : yes || no) :  ").lower() #To reduce user input errors
-    if isUrgent == "yes" :
-        priority= get_valid_input("Enter task priority ( High || Medium || Low ) : ").lower()
-        #validate priority
-        valid_priority(priority)
-        task= UrgentTask(title,description,due_date,status,priority)
-        urgentTasks[task.task_id] = task
-    else :
-        task= Task(title,description,due_date,status)
-        regularTasks[task.task_id] = task
-    
-    print("TASK ADDED SUCCESSFULLY")
+    try:
+        #using get_valid_input for all user inputs to validate it
+        title= get_valid_input("What is the task title? : ")
+        description= get_valid_input("Just a little description for the task here please : ")
+        due_date= get_valid_input("Enter task due date (DD/MM/YYYY)")
+        #validate date format
+        validate_date(due_date)
+        status = get_valid_input("Enter task status (InProgress/Completed): ").lower()
+        validate_status(status)
+        #check if the task is urgent or not to know where to store it 
+        isUrgent= get_valid_input("Is this task urgent (please write : yes || no) :  ").lower() #To reduce user input errors
+        if isUrgent == "yes" :
+            priority= get_valid_input("Enter task priority ( High || Medium || Low ) : ").lower()
+            #validate priority
+            valid_priority(priority)
+            task= UrgentTask(title,description,due_date,status,priority)
+            urgentTasks[task.task_id] = task
+        else :
+            task= Task(title,description,due_date,status)
+            regularTasks[task.task_id] = task
+        
+        print("TASK ADDED SUCCESSFULLY")
+
+
+    except ValueError as e:
+    #For validation errors
+        print(f"Error: {e}")
 
 
 def view_tasks():
@@ -54,17 +60,21 @@ def update_task():
     
 
     if taskUpdate:
-        new_taskTitle= input("Enter the new task title : ")
-        new_taskDescription= input("Enter the new task description : ")
-        new_taskDueDate= input("Enter the new due date(DD/MM/YYYY) : ")
-        if new_taskDueDate:      
-            validate_date(new_taskDueDate)
-        new_taskStatus= input("Enter the new status( Completed || InProgress ) : ").lower() #to make sure not getting value error
-        if new_taskStatus:
-            validate_status(new_taskStatus)
+        try:
+            new_taskTitle= input("Enter the new task title : ")
+            new_taskDescription= input("Enter the new task description : ")
+            new_taskDueDate= input("Enter the new due date(DD/MM/YYYY) : ")
+            if new_taskDueDate:      
+                validate_date(new_taskDueDate)
+            new_taskStatus= input("Enter the new status( Completed || InProgress ) : ").lower() #to make sure not getting value error
+            if new_taskStatus:
+                validate_status(new_taskStatus)
         
-        taskUpdate.update_details(new_taskTitle,new_taskDescription,new_taskDueDate,new_taskStatus)
-        print("Task updated")
+            taskUpdate.update_details(new_taskTitle,new_taskDescription,new_taskDueDate,new_taskStatus)
+            print("Task updated")
+        except ValueError as e:    
+            print(f"Error: {e}")
+
 
 
     else:
