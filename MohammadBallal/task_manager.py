@@ -61,6 +61,7 @@ def update_task():
 
     if taskUpdate:
         try:
+            print(" **** leave blank to keep unchanged ***** ")
             new_taskTitle= input("Enter the new task title : ")
             new_taskDescription= input("Enter the new task description : ")
             new_taskDueDate= input("Enter the new due date(DD/MM/YYYY) : ")
