@@ -64,26 +64,30 @@ def add_task():
         task_instance = UrgentTask(priority ,title,description,due_date,status)
         tasks.append(task_instance)
         print("Urgent task successfully created.")
-        main()
     else :
         task_instance = Task(title,description,due_date,status)
         tasks.append(task_instance)
         print("task successfully created")
-        main()
 
 def view_tasks():
     if not tasks:
         print("🚫 No tasks available. 🚫")
     else:
-        urgent_tasks = [task for task in tasks if isinstance(task, UrgentTask)]
-        regular_tasks = [task for task in tasks if isinstance(task, Task) and not isinstance(task, UrgentTask)]
+        urgent_tasks = []
+        regular_tasks = []
 
+        for task in tasks :
+            if isinstance(task ,UrgentTask ):
+                urgent_tasks.append(task)
+            elif isinstance(task , Task) and not isinstance(task,UrgentTask):
+                regular_tasks.append(task)
+            
         if urgent_tasks:
             print("\n" + "="*30)
             print("🚨🚨🚨 Urgent Tasks 🚨🚨🚨")
             print("="*30)
             for task in urgent_tasks:
-                task.display()
+                print(task.display())
                 print("\n")
 
             print("\n")
@@ -92,9 +96,8 @@ def view_tasks():
             print("📝📝📝 Regular Tasks 📝📝📝")
             print("-"*30)
             for task in regular_tasks:
-                task.display()
+                print(task.display())
                 print("\n")
-    main()
 
 
 # This function find a specific task in tasks list and return it to make operation on it 
@@ -111,13 +114,25 @@ def update_task():
         task_to_update = find_task_by_id(task_id)        
         print("\nPlease provide the new details. Leave blank if you don't want to change a specific field.") 
         new_title = input("New Title (leave blank to keep the current title): ").strip()
-        new_status = input("New Status (leave blank to keep the current status): ").strip()
-        if new_status:
-            utils.validate_status(new_status)    
+        while True:
+            new_status = input("New Status (leave blank to keep the current status): ").strip().lower()
+            if not new_status :
+                break
+            try:
+                utils.validate_status(new_status)
+                break
+            except ValueError as e:
+                print(e)   
         new_description = input("New Description (leave blank to keep the current description): ").strip()
-        new_due_date = input("New Due Date (YYYY-MM-DD) (leave blank to keep the current due date): ").strip()
-        if new_due_date:
-            utils.validate_date(new_due_date)
+        while True:
+            new_due_date = input("New Due Date (YYYY-MM-DD) (leave blank to keep the current due date): ").strip()
+            if not new_due_date :
+                break
+            try:
+                utils.validate_date(new_due_date)
+                break
+            except ValueError as e:
+                print(e)   
         task_to_update.update_details(
             title=new_title if new_title else task_to_update.title, 
             description=new_description if new_description else task_to_update.description,
@@ -125,7 +140,6 @@ def update_task():
             status=new_status if new_status else task_to_update.status
         )
         print("Task updated successfully.")
-        main()  
     except ValueError as e:
         print(e)
 
@@ -134,6 +148,7 @@ def Delete_task():
     try :
         task_to_delete = find_task_by_id(task_id)
         tasks.remove(task_to_delete)
+        print("Task Deleted successfully.")
     except ValueError as e:
         print(e)
     
@@ -169,7 +184,7 @@ def search_by_status():
     utils.validate_status(status)
     for task in tasks:
         if task.status == status:
-            task.display()    
+            print(task.display())    
   except ValueError as e:
     print(e)
 
@@ -199,5 +214,5 @@ def main():
 
 
 read_from_file()
+print(tasks)
 main()
-2

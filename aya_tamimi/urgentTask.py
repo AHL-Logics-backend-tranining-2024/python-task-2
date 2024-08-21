@@ -8,7 +8,5 @@ class UrgentTask(Task):
     
 
     def display(self):
-         super().display()
-         print(f"Priority    : {self.priority}")
-
-
+         return( super().display() + f"priority     : {self.priority}\n")
+       

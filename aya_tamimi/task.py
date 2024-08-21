@@ -21,11 +21,12 @@ class Task :
 
        
     def display(self):
-        print(f"Task Details:")
-        print(f"-----------------------------")
-        print(f"Task Id     : {self.task_id}")
-        print(f"Title       : {self.title}")
-        print(f"Status      : {self.status}")
-        print(f"Description : {self.description}")
-        print(f"Due Date    : {self.due_date}")
-
+        return (
+            f"Task Details:\n"
+            f"-----------------------------\n"
+            f"Task Id     : {self.task_id}\n"
+            f"Title       : {self.title}\n"
+            f"Status      : {self.status}\n"
+            f"Description : {self.description}\n"
+            f"Due Date    : {self.due_date}\n"
+        )

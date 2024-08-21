@@ -19,13 +19,3 @@ def validate_priority(priority):
     if priority not in ["high", "medium", "low"]:
             raise ValueError("Invalid priority , priority must be  High , Medium or Low ")
     return True
-
-
-
- 
-
-
-
-
-
-       
