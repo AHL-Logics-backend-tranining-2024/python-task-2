@@ -1,8 +1,7 @@
 from  utils import validate_date,get_valid_input,validate_status,validate_priority
 from task import Task,UrgentTask
-# List contains all the tasks 
-tasks_list=[]
-
+# Dictionory contains all the tasks 
+tasks_dict = {}
 def Add_task():
     """ Call the Exception Handling Functions in the other module at every step it should be called"""
     title=input("Enter the title")
@@ -11,64 +10,72 @@ def Add_task():
     validate_date(due_date)
     status = input("Enter status ('InProgress' or 'Completed'): ")
     validate_status(status)
-    
     try:
         """ Check if its Urgant """
         isUrgant=input("enter if urgant or not (yes or no or Invalid)")
-        if isUrgant in ["yes","no"]:
+        if isUrgant:
             priority = input("Enter priority ('High', 'Medium', 'Low'): ")
             validate_priority(priority)
             addUrgent= UrgentTask(priority,title,description,due_date,status)
-            tasks_list.append(addUrgent)
+            tasks_dict[addUrgent.task_id]=addUrgent
         else:
             addtask=Task(title,description,due_date,status)
-            tasks_list.append(addtask)
+            tasks_dict[addtask.task_id]=addtask
             """ Check if there any Exception in adding tasks to the task list"""
+        
     except ValueError as e:
         print (e)
 
 def View_Tasks():
     """ Display the tasks"""
-    if tasks_list:
-         for task in tasks_list:
+    if tasks_dict:
+         for task in tasks_dict.values():
             task.display()
     else:
         print ("No tasks added")
 
+
 def Update_Task():
     taskId=int(input("Enter the task you want to update"))
-    title=input("Enter the title updated ")
-    description=input("enter the description update")
-    due_date = input("Enter due date (YYYY-MM-DD) update: ")
-    validate_date(due_date)
-    status = input("Enter status ('InProgress' or 'Completed'): update ")
-    validate_status(status)
-    for task in tasks_list:
-        if task.task_id==taskId:
-            isUrgant=input("enter if urgant or not (yes or no or Invalid)")
-            if isUrgant in ["yes","no"]:
-                priority = input("Enter priority ('High', 'Medium', 'Low'): ")
-                validate_priority(priority)
-                task["title"]=title
-                task["description"]=description
-                task["due_date"]=due_date
-                task["status"]=status
-                task["priority"]=priority
-            else :
-                task["title"]=title
-                task["description"]=description
-                task["due_date"]=due_date
-                task["status"]=status
+
+    if taskId in tasks_dict:
+        task = tasks_dict[taskId]
+        isUrgant=input("enter if urgant or not (yes or no or Invalid)")
+        if isUrgant:
+            title=input("Enter the title updated ")
+            description=input("enter the description update")
+            due_date = input("Enter due date (YYYY-MM-DD) update: ")
+            validate_date(due_date)
+            status = input("Enter status ('InProgress' or 'Completed'): update ")
+            validate_status(status)
+            priority = input("Enter updated priority ('High', 'Medium', 'Low'): ")
+            validate_priority(priority)
+            task.title = title
+            task.description = description
+            task.due_date = due_date
+            task.status = status
+            task.priority = priority
+        else:
+            title=input("Enter the title updated ")
+            description=input("enter the description update")
+            due_date = input("Enter due date (YYYY-MM-DD) update: ")
+            validate_date(due_date)
+            status = input("Enter status ('InProgress' or 'Completed'): update ")
+            validate_status(status)
+            task.title = title
+            task.description = description
+            task.due_date = due_date
+            task.status = status
+                
 
 
 def Delete_Task():
     taskId=int(input("Enter the task you want to delate "))
-    for task in tasks_list:
-        if taskId==task.task_id:
-            tasks_list.remove(task)
-            print ("task have been removed ")
-        else:
-            print ("No Task found ")
+    if taskId in tasks_dict:
+        del tasks_dict[taskId]
+        print ("task have been removed ")
+    else:
+        print ("No Task found ")
 
 def main():
     while True:
