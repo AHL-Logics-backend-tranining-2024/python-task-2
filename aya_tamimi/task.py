@@ -22,11 +22,5 @@ class Task :
        
     def display(self):
         return (
-            f"Task Details:\n"
-            f"-----------------------------\n"
-            f"Task Id     : {self.task_id}\n"
-            f"Title       : {self.title}\n"
-            f"Status      : {self.status}\n"
-            f"Description : {self.description}\n"
-            f"Due Date    : {self.due_date}\n"
+            f"Task Id     : {self.task_id}\nTitle       : {self.title}\nStatus      : {self.status}\nDescription : {self.description}\nDue Date    : {self.due_date}\n"
         )
