@@ -12,16 +12,18 @@ def add_task():
     due_date= get_valid_input("Enter task due date (DD/MM/YYYY)")
     #validate date format
     validate_date(due_date)
+    status = get_valid_input("Enter task status (InProgress/Completed): ").lower()
+    validate_status(status)
     #check if the task is urgent or not to know where to store it 
     isUrgent= get_valid_input("Is this task urgent (please write : yes || no) :  ").lower() #To reduce user input errors
     if isUrgent == "yes" :
         priority= get_valid_input("Enter task priority ( High || Medium || Low ) : ").lower()
         #validate priority
         valid_priority(priority)
-        task= UrgentTask(title,description,due_date,priority)
+        task= UrgentTask(title,description,due_date,status,priority)
         urgentTasks[task.task_id] = task
     else :
-        task= Task(title,description,due_date)
+        task= Task(title,description,due_date,status)
         regularTasks[task.task_id] = task
     
     print("TASK ADDED SUCCESSFULLY")
