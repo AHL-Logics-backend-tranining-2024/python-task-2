@@ -12,7 +12,7 @@ def Add_task():
     validate_status(status)
     try:
         """ Check if its Urgant """
-        isUrgant=input("enter if urgant or not (yes or no or Invalid)")
+        isUrgant=input("enter if urgant or not (True or False)")
         if isUrgant:
             priority = input("Enter priority ('High', 'Medium', 'Low'): ")
             validate_priority(priority)
@@ -40,7 +40,7 @@ def Update_Task():
 
     if taskId in tasks_dict:
         task = tasks_dict[taskId]
-        isUrgant=input("enter if urgant or not (yes or no or Invalid)")
+        isUrgant=input("enter if urgant or not (True or False)")
         if isUrgant:
             title=input("Enter the title updated ")
             description=input("enter the description update")
