@@ -1,6 +1,6 @@
 class Task:
     task_id=0
-    def __init__(self,title,description,due_date,status="In progress"):
+    def __init__(self,title,description,due_date,status="InProgress"):
         Task.task_id+=1
         self.title=title
         self.description=description
@@ -24,7 +24,7 @@ class Task:
 
 
 class UrgentTask(Task):
-    def __init__(self,priority,title,description,due_date,status="In progress"):
+    def __init__(self,priority,title,description,due_date,status="InProgress"):
         super().__init__(title,description,due_date,status)
         self.priority=priority
 

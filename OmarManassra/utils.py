@@ -1,13 +1,15 @@
+from datetime import datetime
 # The Date Exception Handling 
 def validate_date(date_str):
-    if date_str=="20-8-2024":
-        print ("the Date is right")
-    else:
-        raise ValueError("the value Date is not right ")
+    try:
+        datetime.strptime(date_str, "%Y-%m-%d")
+        print ("the date is valid ")
+    except ValueError:
+        raise ValueError("The date is not valid,use the format YYYY-MM-DD. ")
 # The input Exception Handling
 def get_valid_input(prompt):
-    In_val=input(prompt)
-    if In_val:
+    in_val=input(prompt)
+    if in_val:
         print ("the value is Valid")
     else:
         raise ValueError("the Input Value is incorrect")

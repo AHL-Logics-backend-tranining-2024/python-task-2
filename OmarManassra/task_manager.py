@@ -2,7 +2,7 @@ from  utils import validate_date,get_valid_input,validate_status,validate_priori
 from task import Task,UrgentTask
 # Dictionory contains all the tasks 
 tasks_dict = {}
-def Add_task():
+def add_task():
     """ Call the Exception Handling Functions in the other module at every step it should be called"""
     title=input("Enter the title")
     description=input("enter the description")
@@ -12,8 +12,8 @@ def Add_task():
     validate_status(status)
     try:
         """ Check if its Urgant """
-        isUrgant=input("enter if urgant or not (True or False)")
-        if isUrgant:
+        is_urgant=input("enter if urgant or not (True or False)")
+        if is_urgant:
             priority = input("Enter priority ('High', 'Medium', 'Low'): ")
             validate_priority(priority)
             addUrgent= UrgentTask(priority,title,description,due_date,status)
@@ -26,7 +26,7 @@ def Add_task():
     except ValueError as e:
         print (e)
 
-def View_Tasks():
+def view_tasks():
     """ Display the tasks"""
     if tasks_dict:
          for task in tasks_dict.values():
@@ -35,44 +35,31 @@ def View_Tasks():
         print ("No tasks added")
 
 
-def Update_Task():
-    taskId=int(input("Enter the task you want to update"))
-
-    if taskId in tasks_dict:
-        task = tasks_dict[taskId]
+def update_task():
+    task_id=int(input("Enter the task you want to update"))
+    title=input("Enter the title updated ")
+    description=input("enter the description update")
+    due_date = input("Enter due date (YYYY-MM-DD) update: ")
+    validate_date(due_date)
+    status = input("Enter status ('InProgress' or 'Completed'): update ")
+    validate_status(status)
+    if task_id in tasks_dict:
+        task = tasks_dict[task_id]
+        task.title = title
+        task.description = description
+        task.due_date = due_date
+        task.status = status
         isUrgant=input("enter if urgant or not (True or False)")
         if isUrgant:
-            title=input("Enter the title updated ")
-            description=input("enter the description update")
-            due_date = input("Enter due date (YYYY-MM-DD) update: ")
-            validate_date(due_date)
-            status = input("Enter status ('InProgress' or 'Completed'): update ")
-            validate_status(status)
             priority = input("Enter updated priority ('High', 'Medium', 'Low'): ")
             validate_priority(priority)
-            task.title = title
-            task.description = description
-            task.due_date = due_date
-            task.status = status
             task.priority = priority
-        else:
-            title=input("Enter the title updated ")
-            description=input("enter the description update")
-            due_date = input("Enter due date (YYYY-MM-DD) update: ")
-            validate_date(due_date)
-            status = input("Enter status ('InProgress' or 'Completed'): update ")
-            validate_status(status)
-            task.title = title
-            task.description = description
-            task.due_date = due_date
-            task.status = status
-                
-
-
-def Delete_Task():
-    taskId=int(input("Enter the task you want to delate "))
-    if taskId in tasks_dict:
-        del tasks_dict[taskId]
+        
+           
+def delete_task():
+    task_id=int(input("Enter the task you want to delate "))
+    if task_id in tasks_dict:
+        del tasks_dict[task_id]
         print ("task have been removed ")
     else:
         print ("No Task found ")
@@ -84,13 +71,13 @@ def main():
         Choice=input("Enter the choice ")
         match Choice:
             case "1":
-                 Add_task()
+                 add_task()
             case "2":
-                 View_Tasks()
+                 view_tasks()
             case "3":
-                 Update_Task()
+                 update_task()
             case "4":
-                 Delete_Task()
+                 delete_task()
             case "5":
                  print ("Thanks For Using")
                  break 
