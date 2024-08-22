@@ -4,20 +4,33 @@ from datetime import datetime
 from enum import Enum
 from Task import Task, UrgentTask, Status, Priority
 from utils import get_valid_input
+
 class TaskManager:
+    _instance = None
+
     """Class to manage tasks including adding, viewing, updating, and deleting."""
+
+    def __new__(cls, *args, **kwargs):
+        """
+        Ensure only one instance of TaskManager is created.
+        """
+        if cls._instance is None:
+            cls._instance = super(TaskManager, cls).__new__(cls)
+        return cls._instance
 
     def __init__(self, data_file='data.json'):
         """
         Initialize the TaskManager with a specified data file.
-
+        
         Parameters:
         - data_file: The path to the JSON file storing task data.
         """
-        self.data_file = data_file
-        self.tasks = []
-        self.urgent_tasks = []
-        self.load_tasks()
+        if not hasattr(self, 'initialized'):  # Prevent reinitialization
+            self.data_file = data_file
+            self.tasks = []
+            self.urgent_tasks = []
+            self.load_tasks()
+            self.initialized = True  # Mark as initialized
 
     def load_tasks(self):
         """Load tasks from the JSON data file into the manager."""
@@ -137,10 +150,9 @@ class TaskManager:
                 return task
         return None
 
-
-
 def main_menu():
     """Display the main menu and handle user input."""
+    
     task_manager = TaskManager()
 
     while True:
