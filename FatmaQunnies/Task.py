@@ -30,11 +30,3 @@ class Task:
             f"Status: {self.status}\n")
         return displayString
     
-    
-# task =Task("pythonTask","classes","2021-02-02")
-# task2 =Task("pythonTask2","classes","2021-02-02")
-# task3 =Task("pythonTask3","classes","2021-02-02")
-
-# print(task.display())
-# print(task2.display())
-# print(task3.display())

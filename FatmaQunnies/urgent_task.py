@@ -12,5 +12,3 @@ class UrgentTask (Task) :
            )
         return displayString
     
-urgent_task = UrgentTask("Important Task", "Review ", "2024-08-05", "Medium")
-# print(urgent_task.display())

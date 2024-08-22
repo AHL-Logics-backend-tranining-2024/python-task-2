@@ -19,10 +19,9 @@ def add_task():
         priority_input = input("Enter the priority (High/Medium/Low)  ").strip()
         priority = validate_priority(priority_input)
         task = UrgentTask(title, description, due_date, priority)
-        tasks.append(task)
   else:
     task = Task(title, description, due_date)
-    tasks.append(task)
+  tasks.append(task)
   print("Task added successfully.")
 
 
@@ -102,9 +101,3 @@ def Menu():
         else:
             print("Invalid choice. Please try again.")
 Menu()
-# view_tasks()
-# add_task()
-# view_tasks()
-# update_task()
-# view_tasks()
-# delete_task()
