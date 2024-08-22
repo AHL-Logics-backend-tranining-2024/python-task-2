@@ -1,0 +1,20 @@
+[{
+ "title": "cook", 
+ "description": "cook fish", 
+ "due_date": "2024-8-29", 
+ "status": "InProgress"}, 
+ {
+  "title": "clean",
+   "description": "clean the leavingroom", 
+  "due_date": "2024-8-10", "status": "Completed"}, 
+  {
+   "title": "study", 
+   "description": "study for math test",
+    "due_date": "2024-10-6", 
+   "status": "InProgress"},
+    {
+    "title": "Go on vecation", 
+    "description": "lol", 
+    "due_date": "2029-1-1", 
+"status": "InProgress",
+ "priority": "low"}]
