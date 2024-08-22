@@ -29,10 +29,10 @@ class Task:
         self.id = uuid.uuid4()  # Generate a unique identifier for the task.
         self.title = title
         self.description = description
-        self.due_date = self.validateDate(due_date)  # Validate the due date.
+        self.due_date = self.validate_date(due_date)  # Validate the due date.
         self.status = status  # Save enum value
 
-    def validateDate(self, date):
+    def validate_date(self, date):
         """
         Validate the format of the due date.
 
@@ -65,7 +65,7 @@ class Task:
         if description is not None:
             self.description = description
         if due_date is not None:
-            self.due_date = self.validateDate(due_date)  # Validate and update the due date.
+            self.due_date = self.validate_date(due_date)  # Validate and update the due date.
         if status is not None and isinstance(status, Status):  # Save enum value
             self.status = status
 

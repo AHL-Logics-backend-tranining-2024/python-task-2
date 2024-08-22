@@ -76,8 +76,12 @@ class TaskManager:
                 task_data['priority'] = task.priority.name
             data.append(task_data)
 
-        with open(self.data_file, 'w') as f:
+        try:
+         with open(self.data_file, 'w') as f:
             json.dump(data, f, indent=4)
+        except Exception as e:
+            print(f"an error happend {e}")
+        
 
     def add_task(self):
         """Prompt the user to add a new task, either regular or urgent."""
@@ -103,8 +107,11 @@ class TaskManager:
     def view_tasks(self):
         """Display all regular and urgent tasks."""
         print("\nRegular Tasks:")
-        for task in self.tasks:
+        try:
+         for task in self.tasks:
             task.display()
+        except Exception as e:
+            print(f"an error happend {e}")    
 
         print("\nUrgent Tasks:")
         for task in self.urgent_tasks:
