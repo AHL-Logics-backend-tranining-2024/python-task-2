@@ -149,6 +149,16 @@ class TaskManager:
             if str(task.id) == task_id:
                 return task
         return None
+    
+    def search_by_status(self):
+     try:
+      status = input("Enter the status to filter tasks: ").strip().lower()
+      
+      for task in self.tasks + self.urgent_tasks:
+        if task.status == status:
+            print(task.display())    
+     except ValueError as e:
+      print(e)
 
 def main_menu():
     """Display the main menu and handle user input."""
@@ -159,25 +169,31 @@ def main_menu():
         print("\nTask Manager Menu:")
         print("1. Add Task")
         print("2. View Tasks")
-        print("3. Update Task")
-        print("4. Delete Task")
-        print("5. Exit")
+        print("3. search Task (status)")
+        print("4. Update Task")
+        print("5. Delete Task")
+        print("6. Exit")
 
         choice = input("Choose an option: ")
 
         if choice == '1':
             task_manager.add_task()
-        elif choice == '2':
+        elif choice == '2':    
             task_manager.view_tasks()
         elif choice == '3':
-            task_manager.update_task()
+            task_manager.search_by_status()    
         elif choice == '4':
-            task_manager.delete_task()
+            task_manager.update_task()
         elif choice == '5':
+            task_manager.delete_task()
+        elif choice == '6':
             print("Exiting Task Manager.")
             break
         else:
             print("Invalid choice. Please select a valid option.")
+
+     
+
 
 if __name__ == "__main__":
     main_menu()
