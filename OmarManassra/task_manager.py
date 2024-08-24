@@ -16,11 +16,11 @@ def add_task():
         if is_urgant:
             priority = input("Enter priority ('High', 'Medium', 'Low'): ")
             validate_priority(priority)
-            addUrgent= UrgentTask(priority,title,description,due_date,status)
-            tasks_dict[addUrgent.task_id]=addUrgent
+            add_urgent= UrgentTask(priority,title,description,due_date,status)
+            tasks_dict[add_urgent.task_id]=add_urgent
         else:
-            addtask=Task(title,description,due_date,status)
-            tasks_dict[addtask.task_id]=addtask
+            add_task=Task(title,description,due_date,status)
+            tasks_dict[add_task.task_id]=add_task
             """ Check if there any Exception in adding tasks to the task list"""
         
     except ValueError as e:
@@ -37,23 +37,26 @@ def view_tasks():
 
 def update_task():
     task_id=int(input("Enter the task you want to update"))
-    title=input("Enter the title updated ")
-    description=input("enter the description update")
-    due_date = input("Enter due date (YYYY-MM-DD) update: ")
-    validate_date(due_date)
-    status = input("Enter status ('InProgress' or 'Completed'): update ")
-    validate_status(status)
     if task_id in tasks_dict:
+        task_id=int(input("Enter the task you want to update"))
+        title=input("Enter the title updated ")
+        description=input("enter the description update")
+        due_date = input("Enter due date (YYYY-MM-DD) update: ")
+        validate_date(due_date)
+        status = input("Enter status ('InProgress' or 'Completed'): update ")
+        validate_status(status)
         task = tasks_dict[task_id]
         task.title = title
         task.description = description
         task.due_date = due_date
         task.status = status
-        isUrgant=input("enter if urgant or not (True or False)")
-        if isUrgant:
+        is_urgant=input("enter if urgant or not (True or False)")
+        if is_urgant:
             priority = input("Enter updated priority ('High', 'Medium', 'Low'): ")
             validate_priority(priority)
             task.priority = priority
+    else:
+        print("id does not exist")
         
            
 def delete_task():

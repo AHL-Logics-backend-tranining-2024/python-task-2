@@ -30,4 +30,4 @@ class UrgentTask(Task):
 
     def display(self):
         super().display()
-        print (f"the prority is {self.priority}")
+        print (f"the Proiority is {self.priority}")

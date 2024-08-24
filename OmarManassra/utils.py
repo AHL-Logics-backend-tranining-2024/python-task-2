@@ -15,7 +15,7 @@ def get_valid_input(prompt):
         raise ValueError("the Input Value is incorrect")
 # The Status Exception Handling 
 def validate_status(status):
-    if status=="Complate" or status=="InProgress":
+    if status=="Completed" or status=="InProgress":
         print ("Valid ")
     else:
         raise ValueError("InValid Input Status")
