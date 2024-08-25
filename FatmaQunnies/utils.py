@@ -1,36 +1,32 @@
-import re
+from datetime import datetime
 from task_status import Status
 
 def validate_date(date_str):
-    while True:
-        if re.match(r'^\d{4}-\d{2}-\d{2}$', date_str):
-            return date_str
-        else:
-            print("Invalid date format. Use YYYY-MM-DD. Please try again.")
-
+      try:
+            date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+            return date_str 
+      except Exception:
+           return None
+           
 def get_valid_input(inputt):
-  while True:
-        
-        if inputt:
+    if inputt:
             return inputt
-        else:
-            print("Input cannot be empty. Please try again.")
+    else:
+         return None
  
 
 def validate_status(status):
  valid_statuses = ['inProgress', 'completed']
- while True:
-       
-        if status.upper() in Status.__members__:
-            return Status[status.upper()]
+ if status.upper() in Status.__members__:
+        return Status[status.upper()]
         
-        else:
-            print(f"Invalid status. Choose from {valid_statuses}. Please try again.")
+ else:
+        return None
 
 def validate_priority(priority):
     valid_priorities = ['high', 'medium', 'low']
-    while True:
-        if priority in valid_priorities:
-            return priority 
-        print(f"Invalid priority. Choose from {valid_priorities}.")
-        priority = input("Enter the priority (high/medium/low) ").strip().lower()
+    if priority in valid_priorities:
+         return priority 
+    else:
+        return None
+    
