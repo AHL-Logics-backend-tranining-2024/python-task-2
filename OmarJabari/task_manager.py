@@ -1,6 +1,6 @@
 from task import Task, UrgentTask
 from utils import validate_status, validate_date, validate_priority, get_valid_input
-from User_Authentication import authenticate , read_credentials
+from user_authentication import authenticate , read_credentials , get_credentials
 tasks = {}
 urgent_tasks = {}
 
@@ -89,11 +89,17 @@ def displayTasks():
     for task in urgent_tasks.values():
         displayTask(task)
 
+
 def main_menu():
     credentials = read_credentials()
 
-    while not authenticate(credentials):
-        pass
+    while True:
+        username, password = get_credentials()
+        if authenticate(username, password, credentials):
+            print("Authentication successful, Hi!")
+            break
+        else:
+            print("Authentication failed, please try again.")
 
     while True:
         print("\nTask Manager Menu")
@@ -105,18 +111,21 @@ def main_menu():
 
         choice = get_valid_input("Enter your choice (1-5): ")
 
-        if choice == '1':
-            addTask()
-        elif choice == '2':
-            displayTasks()
-        elif choice == '3':
-            updateTask()
-        elif choice == '4':
-            deleteTask()
-        elif choice == '5':
-            print("Exiting Task Manager. Goodbye!")
-            break
-        else:
-            print("Invalid choice. Please try again.")
+        match choice:
+            case '1':
+                addTask()
+            case '2':
+                displayTasks()
+            case '3':
+                updateTask()
+            case '4':
+                deleteTask()
+            case '5':
+                print("Exiting Task Manager. Goodbye!")
+                break
+            case _:
+                print("Invalid choice. Please try again.")
+
+
 if __name__ == "__main__":
     main_menu()

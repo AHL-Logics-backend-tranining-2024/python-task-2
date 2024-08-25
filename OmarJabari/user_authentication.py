@@ -18,14 +18,12 @@ def read_credentials(file_path='credentials.txt'):
 
 
 
-def authenticate(credentials):
-    username = get_valid_input("Enter username: ")
-    password = get_valid_input("Enter password: ")
+def authenticate(username , password , credentials):
+    return username == credentials.get('username') and password == credentials.get('password')
 
-    if username == credentials.get('username') and password == credentials.get('password'):
-        print("Authentication successful , Hi !")
-        return True
-    else:
-        print("Authentication failed ,  Please try again.")
-        return False
 
+
+def get_credentials():
+    username = get_valid_input("Enter username !  ")
+    password = get_valid_input("Enter password !  ")
+    return username, password
