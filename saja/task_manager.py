@@ -112,6 +112,7 @@ class TaskManager:
             task.display()
         except Exception as e:
             print(f"an error happend {e}")    
+            
 
         print("\nUrgent Tasks:")
         for task in self.urgent_tasks:
