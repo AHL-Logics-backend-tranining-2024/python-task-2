@@ -10,7 +10,7 @@
    git clone https://github.com/AHL-Logics-backend-tranining-2024/python-task-2
    cd python-task-2
 
-   ```
+
 
 2. **Create a New Branch:**
    Each intern should create a new branch for their individual project. The branch name should include your name or identifier:
