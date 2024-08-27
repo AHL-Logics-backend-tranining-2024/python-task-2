@@ -1,4 +1,6 @@
 .idea/
 __pycache__/
 *.py[cod]
-OmarJabari/pycache/ folder
+OmarJabari/pycache/__pycache__
+.env
+*.env.local
