@@ -1,6 +1,6 @@
 from  utils import validate_date,get_valid_input,validate_status,validate_priority
 from task import Task,UrgentTask
-# Dictionory contains all the tasks 
+# Dictionary contains all the tasks 
 tasks_dict = {}
 def add_task():
     """ Call the Exception Handling Functions in the other module at every step it should be called"""
