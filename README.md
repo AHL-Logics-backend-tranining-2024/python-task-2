@@ -5,12 +5,9 @@
 ### **Setup**
 
 1. **Clone the Main Repository:**
-
    ```bash
    git clone https://github.com/AHL-Logics-backend-tranining-2024/python-task-2
    cd python-task-2
-
-   
 
 2. **Create a New Branch:**
    Each intern should create a new branch for their individual project. The branch name should include your name or identifier:
@@ -40,8 +37,7 @@ The Task Manager Console Application is a Python-based tool designed to help use
 
 **Purpose:** This module defines the core classes for managing tasks.
 
-- **`Task` Class:**
-
+- **`Task` Class:** 
   - **Attributes:**
     - `task_id`: A unique identifier for the task (auto-generated).
     - `title`: The title or name of the task.
@@ -52,7 +48,7 @@ The Task Manager Console Application is a Python-based tool designed to help use
     - `update_details()`: Update task details such as title, description, due date, and status.
     - `display()`: Return a string representation of the task's details.
 
-- **`UrgentTask` Class:**
+- **`UrgentTask` Class:** 
   - Inherits from `Task` and adds:
     - **Attributes:**
       - `priority`: The urgency level of the task (e.g., 'High', 'Medium', 'Low').
@@ -76,26 +72,27 @@ The Task Manager Console Application is a Python-based tool designed to help use
   - Provides a command-line interface for users to interact with the application.
   - Displays a menu with options to add, view, update, or delete tasks.
   - Utilizes the `Task` and `UrgentTask` classes and utility functions to manage tasks.
+  
 - **Explanation:**
-  1. Add Task:
-     1. Users are prompted to enter details for a new task. They are also asked if the task is urgent (e.g `is_urgent (bool): any shape of yes and no is considered as a valid input`).
-     2. If the task is urgent, the UrgentTask class is used to create the task with a priority level.
-     3. Otherwise, a regular Task is created.
-  2. View Tasks:
-     1. This function displays all tasks and urgent tasks separately.
-  3. Update Task:
-     1. Users can update details for any task. The function finds the task by its ID and updates its attributes. It also validates date and status if provided.
-  4. Delete Task:
-     1. Users can delete a task by its ID. The task is removed from the list of tasks and urgent tasks.
-  5. Main Menu:
-     1. Provides a command-line interface for users to select options to add, view, update, or delete tasks
+    1. Add Task:
+       1. Users are prompted to enter details for a new task. They are also asked if the task is urgent (e.g `is_urgent (bool): any shape of yes and no is considered as a valid input`).
+       2. If the task is urgent, the UrgentTask class is used to create the task with a priority level.
+       3. Otherwise, a regular Task is created.
+    2. View Tasks:
+       1. This function displays all tasks and urgent tasks separately.
+    3. Update Task:
+       1. Users can update details for any task. The function finds the task by its ID and updates its attributes. It also validates date and status if provided.
+    4. Delete Task:
+       1. Users can delete a task by its ID. The task is removed from the list of tasks and urgent tasks.
+    5. Main Menu:
+       1. Provides a command-line interface for users to select options to add, view, update, or delete tasks
 
 ## **Guidelines**
 
-1. **Code Organization:** Organize your code into different modules for clarity and maintainability.
+1. **Code Organization:** Organize your code into different modules for clarity and maintainability. 
 2. **Exception Handling:** Implement error handling to manage invalid inputs, operations on non-existent tasks, and potential file I/O errors.
 3. **Documentation:** Comment your code thoroughly to explain the purpose and functionality of each class and method, please create a README file within your folder project.
-4. **Submission:**
+4. **Submission:** 
    1. Work within your own branch and folder in the cloned repository.
    2. Create a Pull Request: Once you have completed your work, push your changes in your branch to the repository and create a pull request. Ensure your pull request includes a description of the changes and any relevant details.
    3. Engage in discussions with peers and mentors for feedback and improvement.
