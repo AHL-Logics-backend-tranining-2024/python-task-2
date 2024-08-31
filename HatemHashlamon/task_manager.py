@@ -56,7 +56,38 @@ def view_tasks():
             print(task.display() + '\n')
                 
 def update_task():
-    pass
+    try:
+        task_id = int(get_valid_input("Enter task ID to update: "))
+        task = next((t for t in tasks if t.task_id == task_id), None)
+
+        if task is None:
+            print("Task not found.")
+            return
+
+        title = get_valid_input(f"Enter new title (current: {task.title}): ")
+        description = get_valid_input(f"Enter new description (current: {task.description}): ")
+        due_date = get_valid_input(f"Enter new due date (current: {task.due_date}): ")
+        validate_date(due_date)
+        status = get_valid_input(f"Enter new status (current: {task.status}): ")
+        validate_status(status) 
+
+        priority = None
+        if isinstance(task, UrgentTask):
+            priority = get_valid_input(f"Enter new priority (current: {task.priority}): ")
+            validate_priority(priority)
+
+        task.update_details(
+            title=title if title else None,
+            description=description if description else None,
+            due_date=due_date if due_date else None,
+            status=status if status else None,
+            priority=priority if priority else None
+        )
+
+        print("Task updated.")
+    except ValueError as e:
+        print(e)
+
 
 def delete_task():
     pass
