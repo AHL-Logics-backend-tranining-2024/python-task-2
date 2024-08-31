@@ -38,8 +38,23 @@ def add_task():
 
 
 def view_tasks():
-    pass
+    if not tasks:
+        print("No tasks available.")
+        return
 
+    regular_tasks = [task for task in tasks if not isinstance(task, UrgentTask)]
+    urgent_tasks = [task for task in tasks if isinstance(task, UrgentTask)]
+
+    if regular_tasks:
+        print("\nTasks:")
+        for task in regular_tasks:
+            print(task.display() + '\n')
+    
+    if urgent_tasks:
+        print("\nUrgent Tasks:")
+        for task in urgent_tasks:
+            print(task.display() + '\n')
+                
 def update_task():
     pass
 
