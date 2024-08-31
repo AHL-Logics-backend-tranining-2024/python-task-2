@@ -31,6 +31,12 @@ class UrgentTast(Task):
     
     def display(self):
         return super.display() + f"\nPriority: {self.priority}"
+    
+    def update_details(self, title=None, description=None, due_date=None, status=None, priority=None):
+        super().update_details(title, description, due_date, status)
+        if priority is not None:
+            self.priority = priority
+
 
     
         
