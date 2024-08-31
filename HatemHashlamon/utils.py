@@ -8,7 +8,7 @@ def validate_date(date_str: str):
         raise ValueError(f"Date '{date_str}' is not in the correct format (YYYY-MM-DD).")
     
 def get_valid_input(prompt: str):
-    user_input = input(prompt)  
+    user_input = input(prompt).strip()  
     if user_input == "": 
         raise ValueError("The input is empty")
     return user_input

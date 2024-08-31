@@ -24,7 +24,7 @@ class Task:
             f"Status: {self.status}")
 
 
-class UrgentTast(Task):
+class UrgentTask(Task):
     def __init__(self, task_id, title, description, due_date, status, priority):
         self.priority = priority
         super().__init__(task_id, title, description, due_date, status)
