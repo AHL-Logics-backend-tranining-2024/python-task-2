@@ -88,9 +88,15 @@ def update_task():
     except ValueError as e:
         print(e)
 
-
 def delete_task():
-    pass
+    try:
+        task_id = int(get_valid_input("Enter task ID to delete: "))
+
+        tasks = [task for task in tasks if task.task_id != task_id]
+
+        print("Task deleted.")
+    except ValueError as e:
+        print(e)
 
 def main():
     while True:
