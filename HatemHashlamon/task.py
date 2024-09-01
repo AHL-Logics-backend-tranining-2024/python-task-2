@@ -1,6 +1,12 @@
 class Task:
-    def __init__(self, task_id, title, description, due_date, status):
-        self.task_id = task_id
+    nextId = 1
+    def get_nextId():
+        print("\nCurrent task Id is : " + nextId)
+        nextId += 1
+        return nextId-1
+
+    def __init__(self, title, description, due_date, status):
+        self.task_id = Task.get_nextId()
         self.title = title
         self.description = description
         self.due_date = due_date
@@ -25,9 +31,9 @@ class Task:
 
 
 class UrgentTask(Task):
-    def __init__(self, task_id, title, description, due_date, status, priority):
+    def __init__(self, title, description, due_date, status, priority):
         self.priority = priority
-        super().__init__(task_id, title, description, due_date, status)
+        super().__init__(title, description, due_date, status)
     
     def display(self):
         return super.display() + f"\nPriority: {self.priority}"

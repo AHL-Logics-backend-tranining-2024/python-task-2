@@ -3,7 +3,7 @@ from task import *
 from utils import *
 
 # List to store all tasks (including urgent tasks)
-tasks: List[Task] = []
+tasks: Dict[int, Task] = {}
 
 def display_menu():
     print("\nTask Manager")
@@ -15,7 +15,6 @@ def display_menu():
 
 def add_task():
     try:
-        task_id = len(tasks) + 1
         title = get_valid_input("Enter task title: ")
         description = get_valid_input("Enter task description: ")
         due_date = get_valid_input("Enter due date (YYYY-MM-DD): ")
@@ -42,18 +41,13 @@ def view_tasks():
         print("No tasks available.")
         return
 
-    regular_tasks = [task for task in tasks if not isinstance(task, UrgentTask)]
-    urgent_tasks = [task for task in tasks if isinstance(task, UrgentTask)]
-
-    if regular_tasks:
-        print("\nTasks:")
-        for task in regular_tasks:
-            print(task.display() + '\n')
+    print("\nTasks:")
+    for task_id, task in tasks.items():
+        if isinstance(task, UrgentTask):
+            print("Urgent!! :")
+        task.display()
+        print()
     
-    if urgent_tasks:
-        print("\nUrgent Tasks:")
-        for task in urgent_tasks:
-            print(task.display() + '\n')
                 
 def update_task():
     try:
@@ -92,11 +86,15 @@ def delete_task():
     try:
         task_id = int(get_valid_input("Enter task ID to delete: "))
 
-        tasks = [task for task in tasks if task.task_id != task_id]
+        if task_id in tasks:
+            del tasks[task_id] 
+            print("Task deleted.")
+        else:
+            print("Task ID not found.")
 
-        print("Task deleted.")
     except ValueError as e:
-        print(e)
+        print("Invalid input. Please enter a valid task ID.")
+
 
 def main():
     while True:

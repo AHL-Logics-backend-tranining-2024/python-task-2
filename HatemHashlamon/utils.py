@@ -1,4 +1,15 @@
 import datetime
+from enum import Enum
+
+class Status(Enum):
+    IN_PROGRESS = "InProgress"
+    COMPLETED = "Completed"
+
+class Priority(Enum):
+    HIGH = "High"
+    MEDIUM = "Medium"
+    LOW = "Low"
+
 
 def validate_date(date_str: str):
     try:
@@ -14,9 +25,13 @@ def get_valid_input(prompt: str):
     return user_input
 
 def validate_status(status):
-    if status != "InProgress" and status != "Completed":
+    try:
+        Status(status)
+    except:
         raise ValueError(f"the status '{status}' provided is not recognized.")
 
 def validate_priority(priority): 
-    if priority not in ('High', 'Medium', 'Low'):
+    try:
+        Priority(priority)
+    except:
         raise ValueError(f"the priority '{priority}' provided is not recognized.")
