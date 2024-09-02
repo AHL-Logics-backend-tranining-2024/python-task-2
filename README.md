@@ -102,4 +102,3 @@ The Task Manager Console Application is a Python-based tool designed to help use
 - **Data Persistence:** Add functionality to save and load tasks from a file using JSON or CSV formats.
 - **User Authentication:** Implement user authentication to handle tasks for different users.
 - **Task Search:** Add search features to filter tasks by status or due date.
-
