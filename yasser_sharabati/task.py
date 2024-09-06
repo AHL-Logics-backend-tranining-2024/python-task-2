@@ -1,14 +1,10 @@
 import json
+import uuid
 
 class Task:
-    task_id_counter = 0
 
-    def __init__(self, title, description, due_date, status='InProgress', task_id=None):
-        if task_id is None:
-            Task.task_id_counter += 1
-            self.task_id = Task.task_id_counter
-        else:
-            self.task_id = task_id
+    def __init__(self, title, description, due_date, status='InProgress'):
+        self.task_id = uuid.uuid4()
 
         self.title = title
         self.description = description
@@ -49,8 +45,8 @@ class Task:
 
 
 class UrgentTask(Task):
-    def __init__(self, title, description, due_date, priority='High', status='InProgress', task_id=None):
-        super().__init__(title, description, due_date, status, task_id)
+    def __init__(self, title, description, due_date, priority, status):
+        super().__init__(title, description, due_date, status)
         self.priority = priority
 
     def display(self):

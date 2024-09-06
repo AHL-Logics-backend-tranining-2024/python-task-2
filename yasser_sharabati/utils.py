@@ -11,10 +11,10 @@ def validate_date(date_str):
             raise ValueError("Invalid date format. Please use YYYY-MM-DD.")
 
 def get_valid_input(prompt):
-    user_input = input(prompt).strip()
-    if not user_input:
+   
+    if not prompt:
         raise ValueError("Input cannot be empty.")
-    return user_input
+    
 
 def validate_status(status):
     status = status.lower() 

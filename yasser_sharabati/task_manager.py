@@ -4,16 +4,17 @@ from utils import validate_date, get_valid_input, validate_status, validate_prio
 tasks, urgent_tasks = load_tasks_from_file()
 
 def add_task():
-    title = get_valid_input("Enter task title: ")
-    description = get_valid_input("Enter task description: ")
-    due_date = get_valid_input("Enter due date (YYYY-MM-DD): ")
+    title = input("Enter task title: ").strip()
+    description = input("Enter task description: ").strip()
+    due_date = input("Enter due date (YYYY-MM-DD): ").strip()
     
     if not validate_date(due_date):
         return
-    
+    get_valid_input(title)
+    get_valid_input(description)
     is_urgent = input("Is this an urgent task? (yes/no): ").lower()
     if is_urgent in ['yes', 'y']:
-        priority = get_valid_input("Enter task priority (High/Medium/Low): ")
+        priority = input("Enter task priority (High/Medium/Low): ")
         if not validate_priority(priority):
             return
         task = UrgentTask(title, description, due_date, priority)
@@ -45,10 +46,13 @@ def update_task():
             description = input("Enter new description (leave blank to keep current): ")
             due_date = input("Enter new due date (YYYY-MM-DD, leave blank to keep current): ")
             status = input("Enter new status (InProgress/Completed, leave blank to keep current): ")
+            
 
             if due_date and not validate_date(due_date):
+                print ("the date entered is incorrect")
                 return
             if status and not validate_status(status):
+                print("the status entered is incorrect")
                 return
             
             task.update_details(title, description, due_date, status)
